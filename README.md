@@ -18,25 +18,32 @@ This API returns error responses in JSON format. The response includes an error 
 
 Here is an example of an error response:
 
-```
+```json
 {
   "error": "Product not found."
 }
 ```
 
+## Product Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `name` | body | string | Yes | The name of the product. |
+| `description` | body | string | Yes | The description of the product. |
+| `price` | body | number | Yes | The price of the product. |
 
 ## Endpoints
 
-### GET /products
+### GET `/products`
 
 Returns a list of all products in the e-commerce website.
 
 #### Example Request
 
-GET `http://localhost:8000//products`
+GET `http://localhost:8000/products`
 
 #### Example Response
-```
+```json
 [
     {
         "id": 1,
@@ -81,17 +88,17 @@ GET `http://localhost:8000//products`
 ]
 ```
 
-### GET /products/{id}
+### GET `/products/{id}`
 
 Returns a single product from the e-commerce website.
 
 #### Example Request
 
-GET http://localhost:8000/products/1
+GET `http://localhost:8000/products/1`
 
 #### Example Response
 
-```
+```json
 {
     "id": 1,
     "name": "Product 1",
@@ -102,15 +109,15 @@ GET http://localhost:8000/products/1
 }
 ```
 
-### POST /products
+### POST `/products`
 
 Creates a new product in the e-commerce website.
 
 #### Example Request
 
 POST `http://localhost:8000/products`
-Content-Type: application/json
-```
+`Content-Type: application/json`
+```json
 {
 "name": "Product 3",
 "description": "This is the description for Product 3.",
@@ -119,7 +126,7 @@ Content-Type: application/json
 ```
 
 #### Example Response
-```
+```json
 {
     "id": 3,
     "name": "Product 3",
@@ -138,7 +145,7 @@ Updates an existing product in the e-commerce website.
 
 PUT `http://localhost:8000/products/3`
 Content-Type: application/json
-```
+```json
 {
     "description": "This is the updated description for Product 3.",
     "price": 12.99
@@ -146,11 +153,42 @@ Content-Type: application/json
 ```
 
 #### Example Response
-```
+```json
 {
     "id": 3,
     "name": "Product 3",
     "description": "This is the updated description for Product 3.",
     "price": 12.99
 }
+```
+
+# DELETE `/products/{id}`
+
+Deletes the product with the specified ID.
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | path | integer | Yes | The ID of the product to be deleted. |
+
+## Response
+
+### Success
+
+**Code:** 204 No Content
+
+**Content:** None
+
+### Error
+
+**Code:** 404 Not Found
+
+**Content:**
+
+```json
+{
+  "error": "Product not found."
+}
+
 ```
